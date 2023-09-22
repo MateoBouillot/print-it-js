@@ -19,22 +19,31 @@ const slides = [
 
 let bannerImg = document.querySelector(".banner-img")
 let bannerTxt = document.querySelector("#banner p")
-let dots = document.querySelectorAll(".dots .dot")
+let dots = document.querySelector(".dots")
 let slideNbr = 0
+
+
+for (let i=0; i<slides.length; i++) {
+	let dot = '<div class="dot"></div>'
+	dots.innerHTML += dot
+}
+let dot = document.querySelectorAll(".dot")
+console.log(dot)
+dot[0].classList.add("dot_selected")
 
 const arrowLeft = document.querySelector(".arrow_left")
 
 arrowLeft.addEventListener("click", () => {
-	dots[slideNbr].classList.remove("dot_selected")
+	dot[slideNbr].classList.remove("dot_selected")
 	if (slideNbr===0){
-		slideNbr = 3
+		slideNbr = slides.length - 1
 	} else {
 		slideNbr--
 	}
 	bannerImg.src= `./assets/images/slideshow/${slides[slideNbr].image}`
 	bannerTxt.innerHTML=`${slides[slideNbr].tagLine}`
 	
-	dots[slideNbr].classList.add("dot_selected") 
+	dot[slideNbr].classList.add("dot_selected") 
 })
 
 const arrowRight = document.querySelector(".arrow_right")
@@ -43,8 +52,8 @@ arrowRight.addEventListener("click", () => {})
 
 
 arrowRight.addEventListener("click", () => {
-	dots[slideNbr].classList.remove("dot_selected")
-	if (slideNbr===3){
+	dot[slideNbr].classList.remove("dot_selected")
+	if (slideNbr===slides.length - 1){
 		slideNbr = 0
 	} else {
 		slideNbr++
@@ -52,5 +61,5 @@ arrowRight.addEventListener("click", () => {
 	bannerImg.src= `./assets/images/slideshow/${slides[slideNbr].image}`
 	bannerTxt.innerHTML=`${slides[slideNbr].tagLine}` 
 	
-	dots[slideNbr].classList.add("dot_selected")
+	dot[slideNbr].classList.add("dot_selected")
 })
